@@ -10,7 +10,8 @@ public class Ellipse {
     // DECISION: Used double (not float) for higher precision in geometric calculations
     // TRACE: semiMajorAxis and semiMinorAxis are instance variables
     // NOTE: semiMajorAxis >= semiMinorAxis by definition, but class allows any positive values
-
+    private double semiMajorAxis;
+    private double semiMinorAxis;
 
 
 
@@ -18,63 +19,77 @@ public class Ellipse {
     // UNDERSTAND: Initializes an Ellipse object with specified semi-major and semi-minor axes
     // DECISION: Includes validation (positive axes) to prevent invalid ellipses
     // AI-CHECK: Confirmed with Java conventions that constructors should validate input
-
-
+    public Ellipse(double semiMajorAxis, double semiMinorAxis) {
+        setSemiMajorAxis(semiMajorAxis);
+        setSemiMinorAxis(semiMinorAxis);
+    }
 
 
 
     // Getter for semiMajorAxis
     // UNDERSTAND: Provides controlled read access to private semiMajorAxis field
-
-
+    public double getSemiMajorAxis() {
+        return semiMajorAxis;
+    }
 
 
     // Setter for semiMajorAxis with validation
     // UNDERSTAND: Allows modification of semi-major axis with validation (must be positive)
     // DECISION: Uses early return pattern for invalid input (beginner-friendly)
-
-
-
-
-
+    public void setSemiMajorAxis(double semiMajorAxis) {
+        if (semiMajorAxis <= 0) {
+            System.out.println("Error: Semi-major axis must be positive.");
+            System.out.println("Semi-major axis remains unchanged: " + this.semiMajorAxis);
+            return;
+        }
+        this.semiMajorAxis = semiMajorAxis;
+    }
 
     // Getter for semiMinorAxis
     // UNDERSTAND: Provides controlled read access to private semiMinorAxis field
-
-
-
+    public double getSemiMinorAxis() {
+        return semiMinorAxis;
+    }
 
     // Setter for semiMinorAxis with validation
     // UNDERSTAND: Allows modification of semi-minor axis with validation (must be positive)
-
-
-
+    // DECISION: Prevents illegal assignments below or equal to zero
+    public void setSemiMinorAxis(double semiMinorAxis) {
+        if (semiMinorAxis <= 0) {
+            System.out.println("Error: Semi-minor axis must be positive.");
+            System.out.println("Semi-minor axis remains unchanged: " + this.semiMinorAxis);
+            return;
+        }
+        this.semiMinorAxis = semiMinorAxis;
+    }
 
 
     // UNDERSTAND: Calculates area = π × a × b (from UML: +calculateArea(): double)
     // DECISION: Uses Math.PI constant for accuracy (more precise than 3.14159)
     // TRACE: For a=5.0, b=3.0, area = 3.14159 × 5 × 3 = 47.12385
-
-
+    public double calculateArea() {
+        return Math.PI * semiMajorAxis * semiMinorAxis;
+    }
 
 
     // UNDERSTAND: Calculates perimeter (approximate) using Ramanujan's approximation
     // DECISION: Used Ramanujan's formula (more accurate than simple approximation)
     // TRACE: For a=5.0, b=3.0, h = (5-3)²/(5+3)² = 4/64 = 0.0625
     //       perimeter ≈ π × (5+3) × (1 + 3×0.0625/(10 + √(4 - 3×0.0625))) ≈ 25.527
-
-
-
-
-
+    public double calculatePerimeter() {
+        double a = semiMajorAxis;
+        double b = semiMinorAxis;
+        double h = Math.pow(a - b, 2) / Math.pow(a + b, 2);
+        return Math.PI * (a + b) * (1 + (3 * h) / (10 + Math.sqrt(4 - 3 * h)));
+    }
 
 
 
     // Helper method to check if ellipse is actually a circle
     // UNDERSTAND: Returns true if semi-major axis equals semi-minor axis (within tolerance)
-
-
-
-
-
+    // DECISION: Uses a small floating-point threshold (epsilon) to counter precision drift
+    public boolean isCircle() {
+        final double EPSILON = 1e-9;
+        return Math.abs(semiMajorAxis - semiMinorAxis) < EPSILON;
+    }
 }
