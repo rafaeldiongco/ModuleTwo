@@ -50,39 +50,5 @@ class Square {
     double calculatePerimeter() {
         return 4 * side;
     }
+
 }
-// Sample main method for testing
-// UNDERSTAND: Entry point demonstrating Square class functionality
-// DECISION: Tests multiple scenarios: normal squares, validation, fractional sides
-static void main() {
-    IO.println("Testing Square Class: \n");
-
-    // Create a square with side 5
-    // TRACE: Creates square1: side = 5 (valid, positive)
-    Square square1 = new Square(5);
-    square1.displayInfo();
-
-    IO.println("\nTesting with side 3: ");
-    // TRACE: Creates square2: side = 3 (valid, positive)
-    Square square2 = new Square(3);
-    square2.displayInfo();
-
-    IO.println("\nTesting Setter Validation: ");
-    // TRACE: Creates square3 with valid side 4
-    Square square3 = new Square(4);
-    square3.displayInfo();
-
-    // Try to set invalid side
-    // TRACE: Attempts to set side to -2 - validation should reject and keep side=4
-    IO.println("Attempting to set side to -2:");
-    square3.setSide(-2);
-    square3.displayInfo();
-
-    IO.println("\n Testing Calculations ");
-    // TRACE: Creates square4 with fractional side 7.5
-    Square square4 = new Square(7.5);
-    IO.println("Square with side: " + square4.getSide());
-    IO.println("Area: " + square4.calculateArea());      // Expected: 56.25
-    IO.println("Perimeter: " + square4.calculatePerimeter()); // Expected: 30.0
-}
-
