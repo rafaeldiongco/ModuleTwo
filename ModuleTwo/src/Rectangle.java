@@ -44,24 +44,40 @@ public class Rectangle {
 
     // Getter for height
     // UNDERSTAND: Provides controlled read access to private height field
+    // DECISION: Simple value extraction with zero external dependency modifications
+    public double getHeight() {
+        return height;
+    }
 
 
     // Setter for height with validation
     // UNDERSTAND: Allows modification of height with validation (must be positive)
-
+    // DECISION: Keeps mutation logic isolated and prevents illegal zero or negative heights
+    public void setHeight(double height) {
+        if (height <= 0) {
+            // TRACE: Aborts assignments that violate our shape geometry constraints
+            System.out.println("Error: Height must be positive.");
+            System.out.println("Height remains unchanged: " + this.height);
+            return;
+        }
+        this.height = height;
+    }
 
 
 
     // UNDERSTAND: Calculates area = width × height (from UML: +calculateArea(): double)
     // DECISION: No parameters needed - uses instance fields width and height
     // TRACE: For width=5.0, height=3.0 -> area = 15.0
-
+    public double calculateArea() {
+        return width * height;
 
 
 
     // UNDERSTAND: Calculates perimeter = 2 × (width + height) (from UML: +calculatePerimeter(): double)
     // DECISION: Separated from calculateArea() following Single Responsibility Principle
     // TRACE: For width=5.0, height=3.0 -> perimeter = 2 × (5 + 3) = 16.0
-
+    public double calculatePerimeter() {
+        return 2 * (width + height);
+    }
 
 }
