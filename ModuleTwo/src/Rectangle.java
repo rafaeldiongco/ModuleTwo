@@ -2,7 +2,7 @@
 // AI-CHECK: Verified UML-to-Java mapping follows standard conventions
 // TRACE: Class structure follows UML: attributes (private), methods (public)
 
-public class Rectanglee {
+public class Rectangle {
 
     // Data fields (attributes from UML)
     // UNDERSTAND: Private access restricts direct modification from outside the class
