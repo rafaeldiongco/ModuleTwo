@@ -8,23 +8,37 @@ public class Rectanglee {
     // UNDERSTAND: Private access restricts direct modification from outside the class
     // DECISION: Used double (not int) to support fractional measurements
     // TRACE: width and height are instance variables - each Rectangle object has its own copy
-
+    private double width;
+    private double height;
 
     // Constructor (not shown in UML but necessary for usability)
     // UNDERSTAND: Initializes a Rectangle object with specified dimensions
     // DECISION: Includes validation (positive dimensions) to prevent invalid rectangles
     // AI-CHECK: Confirmed with Java conventions that constructors should validate input
-
+    public Rectangle(double width, double height) {
+        setWidth(width);
+        setHeight(height);
+    }
 
     // Getter for width
     // UNDERSTAND: Provides controlled read access to private width field
     // DECISION: No validation needed in getter (only reading, not modifying)
-
+    public double getWidth() {
+        return width;
+    }
 
     // Setter for width with validation
     // UNDERSTAND: Allows modification of width with validation (must be positive)
     // DECISION: Uses early return pattern for invalid input (beginner-friendly)
-
+    public void setWidth(double width) {
+        if (width <= 0) {
+            // TRACE: Reject invalid assignments before mutating the object state
+            System.out.println("Error: Width must be positive.");
+            System.out.println("Width remains unchanged: " + this.width);
+            return;
+        }
+        this.width = width;
+    }
 
     // Getter for height
     // UNDERSTAND: Provides controlled read access to private height field
