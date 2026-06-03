@@ -7,12 +7,16 @@ class Square {
     // DECISION: side is stored as double (not int) to support fractional measurements
     private double side;
 
+    // DECISION: Added a private boolean variable to determine if the square is filled or hollow
+    private boolean filled;
+
     // Constructor
     // UNDERSTAND: Called when a new Square object is created - initializes object state
     // DECISION: Delegates to setter for validation (reuses existing validation logic)
     // AI-CHECK: Confirmed with textbook that setter delegation is a standard pattern
     Square(double side) {
         setSide(side);  // Using setter for validation
+        this.filled = false; // Default state is hollow
     }
 
     // Getter for side
@@ -36,6 +40,16 @@ class Square {
         this.side = side;
     }
 
+    // Getter for filled
+    boolean getFilled() {
+        return filled;
+    }
+
+    // Setter for filled
+    void setFilled(boolean filled) {
+        this.filled = filled;
+    }
+
     // Method to calculate area
     // UNDERSTAND: Returns area of square = side * side
     // DECISION: No input parameters needed (side already stored in object state)
@@ -55,6 +69,25 @@ class Square {
     // UNDERSTAND: Helper method to print current state of the square
     void displayInfo() {
         IO.println("Square side: " + side);
+    }
+
+    // Method to print the square using ASCII characters
+    // TRACE: Loops through rows and columns based on the side length
+    void printSquare() {
+        int n = (int) side;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                // DECISION: If filled is true, print every position.
+                // If hollow, print only the border coordinates.
+                if (filled || i == 0 || i == n - 1 || j == 0 || j == n - 1) {
+                    IO.print("* ");
+                } else {
+                    IO.print("  ");
+                }
+            }
+            IO.println("");
+        }
     }
 
     // Sample main method for testing
