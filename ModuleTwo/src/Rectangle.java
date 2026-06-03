@@ -114,8 +114,6 @@ public class Rectangle {
         }
     }
 
-
-
     // Sample main method for testing
     // UNDERSTAND: Entry point demonstrating Rectangle class functionality
     // DECISION: Tests multiple scenarios: normal rectangles, validation, fractional sides
@@ -151,5 +149,16 @@ public class Rectangle {
         IO.println("Rectangle width: " + rect4.getWidth() + ", height: " + rect4.getHeight());
         IO.println("Area: " + rect4.calculateArea());              // Expected: 15.0
         IO.println("Perimeter: " + rect4.calculatePerimeter());    // Expected: 16.0
+        // Testing the new ASCII method
+        IO.println("\nTesting ASCII Art Display:");
+        Rectangle testRect = new Rectangle(5, 3);
+
+        IO.println("Hollow Rectangle (filled = false):");
+        testRect.setFilled(false);
+        testRect.printRectangle();
+
+        IO.println("\nFilled Rectangle (filled = true):");
+        testRect.setFilled(true);
+        testRect.printRectangle();
     }
 }
