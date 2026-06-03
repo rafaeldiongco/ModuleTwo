@@ -50,6 +50,13 @@ class Square {
     double calculatePerimeter() {
         return 4 * side;
     }
+
+    // Method to display square information
+    // UNDERSTAND: Helper method to print current state of the square
+    void displayInfo() {
+        IO.println("Square side: " + side);
+    }
+
     // Sample main method for testing
     // UNDERSTAND: Entry point demonstrating Square class functionality
     // DECISION: Tests multiple scenarios: normal squares, validation, fractional sides
@@ -84,4 +91,4 @@ class Square {
         IO.println("Area: " + square4.calculateArea());      // Expected: 56.25
         IO.println("Perimeter: " + square4.calculatePerimeter()); // Expected: 30.0
     }
-} // <-- This brace now safely wraps the entire class file together!
+}
