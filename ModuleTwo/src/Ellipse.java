@@ -152,6 +152,13 @@ public class Ellipse {
         ellipse1.displayInfo();
         IO.println("Is Circle? " + ellipse1.isCircle()); // Expected: false
 
+        IO.println("\n--- Testing Filled ASCII Art ---");
+        ellipse1.printASCII();
+
+        IO.println("\n--- Testing Hollow ASCII Art ---");
+        ellipse1.setFilled(false);
+        ellipse1.printASCII();
+
         IO.println("\nTesting with equal dimensions (Special case: Circle): ");
         // TRACE: Creates ellipse2: a = 4.5, b = 4.5 (valid, should detect as circle)
         Ellipse ellipse2 = new Ellipse(4.5, 4.5);
