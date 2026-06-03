@@ -10,6 +10,10 @@ class Triangle {
     private double base;
     private double height;
 
+    // [DECLARE] New state field to track rendering fill status
+    // UNDERSTAND: Encapsulates whether the shape is drawn as an outline or solid block
+    private boolean filled;
+
     // Constructor
     // UNDERSTAND: Initializes a Triangle object with specified base and height dimensions
     // DECISION: Delegates to setters for validation (reuses existing boundary checking logic)
@@ -60,6 +64,18 @@ class Triangle {
         this.height = height;
     }
 
+    // Getter for filled status
+    // UNDERSTAND: Exposes whether the rendering type is outline-only or solid
+    public boolean isFilled() {
+        return filled;
+    }
+
+    // Setter for filled status
+    // UNDERSTAND: Permits switching between filled and hollow text drawing modes
+    public void setFilled(boolean filled) {
+        this.filled = filled;
+    }
+
     // Method to calculate area
     // UNDERSTAND: Calculates area = 0.5 × base × height (from UML: +calculateArea(): double)
     // DECISION: No parameters needed - uses internal instance fields base and height
@@ -75,6 +91,61 @@ class Triangle {
     public double calculatePerimeter() {
         double hypotenuse = Math.sqrt((base * base) + (height * height));
         return base + height + hypotenuse;
+    }
+    // Method to render ASCII Triangle
+    // UNDERSTAND: Discretizes continuous geometric slopes onto a character coordinate grid.
+    // DECISION: Scales dimensions to fit terminal lines and processes grid with an explicit math boundary check.
+    public void draw() {
+        // Print header string dynamically matching standard formats
+        System.out.println("Triangle (b=" + base + ", h=" + height + "):");
+
+        // Convert dimensions to integer scale steps for text-matrix iteration
+        int maxRows = (int) Math.round(height);
+        int maxCols = (int) Math.round(base);
+
+        // Protect against null/degenerate loop execution limits
+        if (maxRows <= 0 || maxCols <= 0) {
+            System.out.println("[Cannot render: dimensions round to zero]");
+            return;
+        }
+
+        // Loop top-to-bottom across matrix rows
+        for (int r = 0; r < maxRows; r++) {
+            // Inverse loop index so row 0 prints the peak and the final row prints the flat base
+            int currentY = maxRows - 1 - r;
+
+            // Loop left-to-right across matrix columns
+            for (int currentX = 0; currentX < maxCols; currentX++) {
+
+                // Calculate position relative to right-triangle hypotenuse slope line
+                // Equation: boundaryX = currentY * (maxCols / maxRows)
+                double boundaryX = ((double) currentY * maxCols) / maxRows;
+
+                if (filled) {
+                    // Solid Mode: fill everything to the right of the slope boundary line
+                    if (currentX >= boundaryX) {
+                        System.out.print("* ");
+                    } else {
+                        System.out.print("  ");
+                    }
+                } else {
+                    // Hollow Mode: draw only on the shape edge perimeters
+                    boolean isBaseRow = (r == maxRows - 1);
+                    boolean isRightEdge = (currentX == maxCols - 1);
+
+                    // Trace character cells that cross right over the computed slope coordinate line
+                    boolean isHypotenuse = (currentX == (int) Math.round(boundaryX));
+
+                    if (isBaseRow || isRightEdge || isHypotenuse) {
+                        System.out.print("* ");
+                    } else {
+                        System.out.print("  ");
+                    }
+                }
+            }
+            // Advance cursor to new terminal window line
+            System.out.println();
+        }
     }
     // Method to display triangle information
     // UNDERSTAND: Helper method to print current state of the triangle
