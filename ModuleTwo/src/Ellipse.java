@@ -120,5 +120,20 @@ public class Ellipse {
         // TRACE: Creates ellipse3 with valid dimensions
         Ellipse ellipse3 = new Ellipse(6, 2);
         ellipse3.displayInfo();
-    
+
+        // Try to set invalid measurements
+        // TRACE: Attempts to set values to negative or zero numbers - validation should reject and keep a=6, b=2
+        IO.println("Attempting to set semi-major axis to -3:");
+        ellipse3.setSemiMajorAxis(-3);
+        IO.println("Attempting to set semi-minor axis to 0:");
+        ellipse3.setSemiMinorAxis(0);
+        ellipse3.displayInfo();
+
+        IO.println("\n Testing Calculations ");
+        // TRACE: Creates ellipse4 with known values to verify area and mathematical formulas
+        Ellipse ellipse4 = new Ellipse(5.0, 3.0);
+        IO.println("Ellipse a: " + ellipse4.getSemiMajorAxis() + ", b: " + ellipse4.getSemiMinorAxis());
+        IO.println("Area: " + ellipse4.calculateArea());              // Expected: ~47.12
+        IO.println("Perimeter: " + ellipse4.calculatePerimeter());    // Expected: ~25.53
+    }
 }
