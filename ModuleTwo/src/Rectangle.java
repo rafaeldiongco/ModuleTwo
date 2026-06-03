@@ -11,6 +11,9 @@ public class Rectangle {
     private double width;
     private double height;
 
+    // DECISION: Added a private boolean variable to determine if the rectangle is filled or hollow
+    private boolean filled;
+
     // Constructor (not shown in UML but necessary for usability)
     // UNDERSTAND: Initializes a Rectangle object with specified dimensions
     // DECISION: Includes validation (positive dimensions) to prevent invalid rectangles
@@ -18,6 +21,7 @@ public class Rectangle {
     public Rectangle(double width, double height) {
         setWidth(width);
         setHeight(height);
+        this.filled = false; // Default state is hollow
     }
 
     // Getter for width
@@ -60,6 +64,16 @@ public class Rectangle {
         this.height = height;
     }
 
+    // Getter for filled
+    public boolean getFilled() {
+        return filled;
+    }
+
+    // Setter for filled
+    public void setFilled(boolean filled) {
+        this.filled = filled;
+    }
+
 
     // UNDERSTAND: Calculates area = width × height (from UML: +calculateArea(): double)
     // DECISION: No parameters needed - uses instance fields width and height
@@ -67,8 +81,6 @@ public class Rectangle {
     public double calculateArea() {
         return width * height;
     }
-
-
 
     // UNDERSTAND: Calculates perimeter = 2 × (width + height) (from UML: +calculatePerimeter(): double)
     // DECISION: Separated from calculateArea() following Single Responsibility Principle
@@ -82,6 +94,27 @@ public class Rectangle {
     public void displayInfo() {
         IO.println("Rectangle - Width: " + width + ", Height: " + height);
     }
+    // Method to print the rectangle using ASCII characters
+    // TRACE: Loops through rows (height) and columns (width)
+    public void printRectangle() {
+        int rows = (int) height;
+        int cols = (int) width;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                // DECISION: If filled is true, print every position.
+                // If hollow, print only the boundary borders.
+                if (filled || i == 0 || i == rows - 1 || j == 0 || j == cols - 1) {
+                    IO.print("* ");
+                } else {
+                    IO.print("  ");
+                }
+            }
+            IO.println("");
+        }
+    }
+
+
 
     // Sample main method for testing
     // UNDERSTAND: Entry point demonstrating Rectangle class functionality
