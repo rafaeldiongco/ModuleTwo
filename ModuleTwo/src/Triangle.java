@@ -102,5 +102,20 @@ class Triangle {
         // TRACE: Creates triangle3 with valid base 4 and height 4
         Triangle triangle3 = new Triangle(4, 4);
         triangle3.displayInfo();
+        // Try to set invalid measurements
+        // TRACE: Attempts to set negative/zero values - validation should reject and keep base=4, height=4
+        IO.println("Attempting to set base to -5:");
+        triangle3.setBase(-5);
+        IO.println("Attempting to set height to 0:");
+        triangle3.setHeight(0);
+        triangle3.displayInfo();
 
+        IO.println("\n Testing Calculations ");
+        // TRACE: Creates triangle4 with traditional 3-4-5 right-triangle values to check calculations
+        Triangle triangle4 = new Triangle(3.0, 4.0);
+        IO.println("Triangle base: " + triangle4.getBase() + ", height: " + triangle4.getHeight());
+        IO.println("Area: " + triangle4.calculateArea());              // Expected: 6.0
+        IO.println("Perimeter: " + triangle4.calculatePerimeter());    // Expected: 12.0 (3 + 4 + 5)
+
+    }
 }
