@@ -33,8 +33,8 @@ public class Rectangle {
     public void setWidth(double width) {
         if (width <= 0) {
             // TRACE: Reject invalid assignments before mutating the object state
-            System.out.println("Error: Width must be positive.");
-            System.out.println("Width remains unchanged: " + this.width);
+            IO.println("Error: Width must be positive.");
+            IO.println("Width remains unchanged: " + this.width);
             return;
         }
         this.width = width;
@@ -53,8 +53,8 @@ public class Rectangle {
     public void setHeight(double height) {
         if (height <= 0) {
             // TRACE: Aborts assignments that violate our shape geometry constraints
-            System.out.println("Error: Height must be positive.");
-            System.out.println("Height remains unchanged: " + this.height);
+            IO.println("Error: Height must be positive.");
+            IO.println("Height remains unchanged: " + this.height);
             return;
         }
         this.height = height;
@@ -80,6 +80,43 @@ public class Rectangle {
     // Method to display rectangle information
     // UNDERSTAND: Helper method to print current state of the rectangle
     public void displayInfo() {
-        System.out.println("Rectangle - Width: " + width + ", Height: " + height);
+        IO.println("Rectangle - Width: " + width + ", Height: " + height);
+    }
+
+    // Sample main method for testing
+    // UNDERSTAND: Entry point demonstrating Rectangle class functionality
+    // DECISION: Tests multiple scenarios: normal rectangles, validation, fractional sides
+    public static void main(String[] args) {
+        IO.println("Testing Rectangle Class: \n");
+
+        // Create a rectangle with width 5 and height 3
+        // TRACE: Creates rect1: width = 5, height = 3 (valid, positive)
+        Rectangle rect1 = new Rectangle(5, 3);
+        rect1.displayInfo();
+
+        IO.println("\nTesting with valid dimensions: ");
+        // TRACE: Creates rect2: width = 6.5, height = 4.2 (valid, fractional values)
+        Rectangle rect2 = new Rectangle(6.5, 4.2);
+        rect2.displayInfo();
+
+        IO.println("\nTesting Setter Validation: ");
+        // TRACE: Creates rect3 with valid width 4 and height 4
+        Rectangle rect3 = new Rectangle(4, 4);
+        rect3.displayInfo();
+
+        // Try to set invalid width and height
+        // TRACE: Attempts to set values to negative numbers - validation should reject and keep width=4, height=4
+        IO.println("Attempting to set width to -2:");
+        rect3.setWidth(-2);
+        IO.println("Attempting to set height to 0:");
+        rect3.setHeight(0);
+        rect3.displayInfo();
+
+        IO.println("\n Testing Calculations ");
+        // TRACE: Creates rect4 with known dimensions to double-check formulas
+        Rectangle rect4 = new Rectangle(5.0, 3.0);
+        IO.println("Rectangle width: " + rect4.getWidth() + ", height: " + rect4.getHeight());
+        IO.println("Area: " + rect4.calculateArea());              // Expected: 15.0
+        IO.println("Perimeter: " + rect4.calculatePerimeter());    // Expected: 16.0
     }
 }
