@@ -13,6 +13,8 @@ public class Ellipse {
     private double semiMajorAxis;
     private double semiMinorAxis;
 
+    // [DECLARE] Added filled property to maintain parity with Square, Rectangle, and Circle
+    private boolean filled;
 
 
     // Constructor (not shown in UML but necessary for usability)
@@ -22,8 +24,8 @@ public class Ellipse {
     public Ellipse(double semiMajorAxis, double semiMinorAxis) {
         setSemiMajorAxis(semiMajorAxis);
         setSemiMinorAxis(semiMinorAxis);
+        this.filled = true; // Default behavior
     }
-
 
 
     // Getter for semiMajorAxis
@@ -31,8 +33,6 @@ public class Ellipse {
     public double getSemiMajorAxis() {
         return semiMajorAxis;
     }
-
-
     // Setter for semiMajorAxis with validation
     // UNDERSTAND: Allows modification of semi-major axis with validation (must be positive)
     // DECISION: Uses early return pattern for invalid input (beginner-friendly)
@@ -63,6 +63,15 @@ public class Ellipse {
         this.semiMinorAxis = semiMinorAxis;
     }
 
+    // Getter for filled
+    public boolean isFilled() {
+        return filled;
+    }
+
+    // Setter for filled
+    public void setFilled(boolean filled) {
+        this.filled = filled;
+    }
 
     // UNDERSTAND: Calculates area = π × a × b (from UML: +calculateArea(): double)
     // DECISION: Uses Math.PI constant for accuracy (more precise than 3.14159)
@@ -70,7 +79,6 @@ public class Ellipse {
     public double calculateArea() {
         return Math.PI * semiMajorAxis * semiMinorAxis;
     }
-
 
     // UNDERSTAND: Calculates perimeter (approximate) using Ramanujan's approximation
     // DECISION: Used Ramanujan's formula (more accurate than simple approximation)
@@ -83,8 +91,6 @@ public class Ellipse {
         return Math.PI * (a + b) * (1 + (3 * h) / (10 + Math.sqrt(4 - 3 * h)));
     }
 
-
-
     // Helper method to check if ellipse is actually a circle
     // UNDERSTAND: Returns true if semi-major axis equals semi-minor axis (within tolerance)
     // DECISION: Uses a small floating-point threshold (epsilon) to counter precision drift
@@ -92,12 +98,48 @@ public class Ellipse {
         final double EPSILON = 1e-9;
         return Math.abs(semiMajorAxis - semiMinorAxis) < EPSILON;
     }
+    // [ASCII] Renders an ellipse structure onto the standard output console matrix
+    // UNDERSTAND: Uses bounded distance checks with adjustments for text character aspect ratios
+    public void printASCII() {
+        IO.println("Ellipse (a=" + semiMajorAxis + ", b=" + semiMinorAxis + "):");
+
+        // Cast bounding properties to configure scanning grid ranges
+        int aInt = (int) Math.round(semiMajorAxis);
+        int bInt = (int) Math.round(semiMinorAxis);
+
+        // Loop scanning coordinates through height (y-axis) and width (x-axis)
+        for (int y = -bInt; y <= bInt; y++) {
+            for (int x = -aInt; x <= aInt; x++) {
+
+                // Text aspect ratio calculation adjustment: scale values to correct stretch
+                double normX = (double) x / semiMajorAxis;
+                double normY = (double) y / semiMinorAxis;
+                double distanceValue = (normX * normX) + (normY * normY);
+
+                if (filled) {
+                    // Fill everything inside the geometric boundary bounds
+                    if (distanceValue <= 1.05) {
+                        IO.print("* ");
+                    } else {
+                        IO.print("  ");
+                    }
+                } else {
+                    // Hollow rendering mode: use threshold boundaries to draw structural shell
+                    if (distanceValue >= 0.75 && distanceValue <= 1.15) {
+                        IO.print("* ");
+                    } else {
+                        IO.print("  ");
+                    }
+                }
+            }
+            IO.println(); // Push matrix index pointer down to the next row
+        }
+    }
     // Method to display ellipse information
     // UNDERSTAND: Helper method to print current state of the ellipse
     public void displayInfo() {
         IO.println("Ellipse - Semi-Major Axis: " + semiMajorAxis + ", Semi-Minor Axis: " + semiMinorAxis);
     }
-
     // Sample main method for testing
     // UNDERSTAND: Entry point demonstrating Ellipse class functionality
     // DECISION: Tests multiple scenarios: normal ellipses, validation, circle detection
