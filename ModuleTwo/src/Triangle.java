@@ -97,7 +97,7 @@ class Triangle {
     // DECISION: Scales dimensions to fit terminal lines and processes grid with an explicit math boundary check.
     public void draw() {
         // Print header string dynamically matching standard formats
-        System.out.println("Triangle (b=" + base + ", h=" + height + "):");
+        IO.println("Triangle (b=" + base + ", h=" + height + "):");
 
         // Convert dimensions to integer scale steps for text-matrix iteration
         int maxRows = (int) Math.round(height);
@@ -105,7 +105,7 @@ class Triangle {
 
         // Protect against null/degenerate loop execution limits
         if (maxRows <= 0 || maxCols <= 0) {
-            System.out.println("[Cannot render: dimensions round to zero]");
+            IO.println("[Cannot render: dimensions round to zero]");
             return;
         }
 
@@ -124,9 +124,9 @@ class Triangle {
                 if (filled) {
                     // Solid Mode: fill everything to the right of the slope boundary line
                     if (currentX >= boundaryX) {
-                        System.out.print("* ");
+                        IO.print("* ");
                     } else {
-                        System.out.print("  ");
+                        IO.print("  ");
                     }
                 } else {
                     // Hollow Mode: draw only on the shape edge perimeters
@@ -137,14 +137,14 @@ class Triangle {
                     boolean isHypotenuse = (currentX == (int) Math.round(boundaryX));
 
                     if (isBaseRow || isRightEdge || isHypotenuse) {
-                        System.out.print("* ");
+                        IO.print("* ");
                     } else {
-                        System.out.print("  ");
+                        IO.print("  ");
                     }
                 }
             }
             // Advance cursor to new terminal window line
-            System.out.println();
+            IO.println();
         }
     }
     // Method to display triangle information
@@ -163,11 +163,14 @@ class Triangle {
         // TRACE: Creates triangle1: base = 6, height = 4 (valid, positive)
         Triangle triangle1 = new Triangle(6, 4);
         triangle1.displayInfo();
+        triangle1.draw();
 
-        IO.println("\nTesting with valid fractional values: ");
-        // TRACE: Creates triangle2: base = 5.5, height = 3.2
-        Triangle triangle2 = new Triangle(5.5, 3.2);
+        IO.println("\nTesting Hollow Layout Configuration: ");
+        // TRACE: Creates triangle2: base = 8, height = 6
+        Triangle triangle2 = new Triangle(8, 6);
+        triangle2.setFilled(false);
         triangle2.displayInfo();
+        triangle2.draw();
 
         IO.println("\nTesting Setter Validation: ");
         // TRACE: Creates triangle3 with valid base 4 and height 4
