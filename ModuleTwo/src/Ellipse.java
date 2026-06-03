@@ -38,8 +38,8 @@ public class Ellipse {
     // DECISION: Uses early return pattern for invalid input (beginner-friendly)
     public void setSemiMajorAxis(double semiMajorAxis) {
         if (semiMajorAxis <= 0) {
-            System.out.println("Error: Semi-major axis must be positive.");
-            System.out.println("Semi-major axis remains unchanged: " + this.semiMajorAxis);
+            IO.println("Error: Semi-major axis must be positive.");
+            IO.println("Semi-major axis remains unchanged: " + this.semiMajorAxis);
             return;
         }
         this.semiMajorAxis = semiMajorAxis;
@@ -56,8 +56,8 @@ public class Ellipse {
     // DECISION: Prevents illegal assignments below or equal to zero
     public void setSemiMinorAxis(double semiMinorAxis) {
         if (semiMinorAxis <= 0) {
-            System.out.println("Error: Semi-minor axis must be positive.");
-            System.out.println("Semi-minor axis remains unchanged: " + this.semiMinorAxis);
+            IO.println("Error: Semi-minor axis must be positive.");
+            IO.println("Semi-minor axis remains unchanged: " + this.semiMinorAxis);
             return;
         }
         this.semiMinorAxis = semiMinorAxis;
@@ -92,4 +92,33 @@ public class Ellipse {
         final double EPSILON = 1e-9;
         return Math.abs(semiMajorAxis - semiMinorAxis) < EPSILON;
     }
+    // Method to display ellipse information
+    // UNDERSTAND: Helper method to print current state of the ellipse
+    public void displayInfo() {
+        IO.println("Ellipse - Semi-Major Axis: " + semiMajorAxis + ", Semi-Minor Axis: " + semiMinorAxis);
+    }
+
+    // Sample main method for testing
+    // UNDERSTAND: Entry point demonstrating Ellipse class functionality
+    // DECISION: Tests multiple scenarios: normal ellipses, validation, circle detection
+    public static void main(String[] args) {
+        IO.println("Testing Ellipse Class: \n");
+
+        // Create an ellipse with semi-major axis 5 and semi-minor axis 3
+        // TRACE: Creates ellipse1: a = 5, b = 3 (valid, positive, distinct values)
+        Ellipse ellipse1 = new Ellipse(5, 3);
+        ellipse1.displayInfo();
+        IO.println("Is Circle? " + ellipse1.isCircle()); // Expected: false
+
+        IO.println("\nTesting with equal dimensions (Special case: Circle): ");
+        // TRACE: Creates ellipse2: a = 4.5, b = 4.5 (valid, should detect as circle)
+        Ellipse ellipse2 = new Ellipse(4.5, 4.5);
+        ellipse2.displayInfo();
+        IO.println("Is Circle? " + ellipse2.isCircle()); // Expected: true
+
+        IO.println("\nTesting Setter Validation: ");
+        // TRACE: Creates ellipse3 with valid dimensions
+        Ellipse ellipse3 = new Ellipse(6, 2);
+        ellipse3.displayInfo();
+    
 }
