@@ -76,4 +76,10 @@ public class Rectangle {
     public double calculatePerimeter() {
         return 2 * (width + height);
     }
+
+    // Method to display rectangle information
+    // UNDERSTAND: Helper method to print current state of the rectangle
+    public void displayInfo() {
+        System.out.println("Rectangle - Width: " + width + ", Height: " + height);
+    }
 }
