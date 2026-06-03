@@ -37,8 +37,8 @@ public class Circle {
     // TRACE: Validation occurs before assignment - invalid values are rejected
     public void setRadius(double radius) {
         if (radius <= 0) {
-            System.out.println("Error: Radius must be positive.");
-            System.out.println("Radius remains unchanged: " + this.radius);
+            IO.println("Error: Radius must be positive.");
+            IO.println("Radius remains unchanged: " + this.radius);
             return; // UNDERSTAND: Early return prevents invalid assignment
         }
         this.radius = radius;
@@ -71,5 +71,42 @@ public class Circle {
     // UNDERSTAND: Helper method to print current state of the circle
     public void displayInfo() {
         IO.println("Circle - Radius: " + radius);
+    }
+    // Sample main method for testing
+    // UNDERSTAND: Entry point demonstrating Circle class functionality
+    // DECISION: Tests multiple scenarios: normal circles, validation, fractional values
+    public static void main(String[] args) {
+        IO.println("Testing Circle Class: \n");
+
+        // Create a circle with radius 5
+        // TRACE: Creates circle1: radius = 5 (valid, positive)
+        Circle circle1 = new Circle(5);
+        circle1.displayInfo();
+
+        IO.println("\nTesting with valid fractional dimension: ");
+        // TRACE: Creates circle2: radius = 3.5 (valid, fractional value)
+        Circle circle2 = new Circle(3.5);
+        circle2.displayInfo();
+
+        IO.println("\nTesting Setter Validation: ");
+        // TRACE: Creates circle3 with valid radius 4
+        Circle circle3 = new Circle(4);
+        circle3.displayInfo();
+
+        // Try to set invalid radius
+        // TRACE: Attempts to set value to negative or zero - validation should reject and keep radius=4
+        IO.println("Attempting to set radius to -1.5:");
+        circle3.setRadius(-1.5);
+        IO.println("Attempting to set radius to 0:");
+        circle3.setRadius(0);
+        circle3.displayInfo();
+
+        IO.println("\n Testing Calculations ");
+        // TRACE: Creates circle4 with a known radius to double-check formulas
+        Circle circle4 = new Circle(5.0);
+        IO.println("Circle radius: " + circle4.getRadius());
+        IO.println("Diameter: " + circle4.calculateDiameter());       // Expected: 10.0
+        IO.println("Area: " + circle4.calculateArea());               // Expected: ~78.54
+        IO.println("Perimeter: " + circle4.calculatePerimeter());    // Expected: ~31.42
     }
 }
