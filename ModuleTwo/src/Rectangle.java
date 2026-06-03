@@ -99,6 +99,9 @@ public class Rectangle {
     public void printRectangle() {
         int rows = (int) height;
         int cols = (int) width;
+        // Prints the type and dimensions header matching the template
+        IO.println("Rectangle (" + cols + "x" + rows + "):");
+
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
