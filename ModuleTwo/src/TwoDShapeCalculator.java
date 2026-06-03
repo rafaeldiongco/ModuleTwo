@@ -84,9 +84,28 @@ public class TwoDShapeCalculator {
                     }
                     break;
 
+                case 4:
+                    System.out.println("\nELLIPSE:\nEnter semi-major axis (a): ");
+                    double a = scanner.nextDouble();
+                    System.out.print("Enter semi-minor axis (b): ");
+                    double b = scanner.nextDouble();
+                    Ellipse ell = new Ellipse(a, b);
+
+                    System.out.print("\nDo you want to display the ellipse? (yes/no): ");
+                    String displayEll = scanner.next();
+
+                    System.out.println("\nRESULTS:");
+                    System.out.println("Shape: Ellipse");
+                    System.out.printf("Area: %.2f%n", ell.calculateArea());
+                    System.out.printf("Perimeter: %.2f%n", ell.calculatePerimeter());
+
+                    // [DECISION] Check for visualization request
+                    if (displayEll.equalsIgnoreCase("yes") || displayEll.equalsIgnoreCase("y")) {
+                        ell.printASCII();
+                    }
+                    break;
 
             }
-
 
 
 
