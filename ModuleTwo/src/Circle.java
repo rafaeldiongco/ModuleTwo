@@ -67,4 +67,9 @@ public class Circle {
     public double calculateDiameter() {
         return 2 * radius;
     }
+    // Method to display circle information
+    // UNDERSTAND: Helper method to print current state of the circle
+    public void displayInfo() {
+        IO.println("Circle - Radius: " + radius);
+    }
 }
