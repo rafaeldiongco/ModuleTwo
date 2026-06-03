@@ -123,5 +123,17 @@ class Square {
         IO.println("Square with side: " + square4.getSide());
         IO.println("Area: " + square4.calculateArea());      // Expected: 56.25
         IO.println("Perimeter: " + square4.calculatePerimeter()); // Expected: 30.0
+
+        // Testing the new ASCII method
+        IO.println("\nTesting ASCII Art Display:");
+        Square testSquare = new Square(5);
+
+        IO.println("Hollow Square (filled = false):");
+        testSquare.setFilled(false);
+        testSquare.printSquare();
+
+        IO.println("\nFilled Square (filled = true):");
+        testSquare.setFilled(true);
+        testSquare.printSquare();
     }
 }
