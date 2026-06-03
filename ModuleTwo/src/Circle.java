@@ -153,7 +153,18 @@ public class Circle {
         Circle circle4 = new Circle(5.0);
         IO.println("Circle radius: " + circle4.getRadius());
         IO.println("Diameter: " + circle4.calculateDiameter());       // Expected: 10.0
-        IO.println("Area: " + circle4.calculateArea()                // Expected: ~78.54
+        IO.println("Area: " + circle4.calculateArea());               // Expected: ~78.54
         IO.println("Perimeter: " + circle4.calculatePerimeter());   // Expected: ~31.42
+        // Testing the new ASCII method
+        IO.println("\nTesting ASCII Art Display:");
+        Circle testCircle = new Circle(5);
+
+        IO.println("Hollow Circle (filled = false):");
+        testCircle.setFilled(false);
+        testCircle.printCircle();
+
+        IO.println("\nFilled Circle (filled = true):");
+        testCircle.setFilled(true);
+        testCircle.printCircle();
     }
 }
