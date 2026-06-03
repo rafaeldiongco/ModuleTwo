@@ -10,6 +10,8 @@ public class Circle {
     // DECISION: Used double (not float) for higher precision in geometric calculations
     // TRACE: radius is an instance variable - each Circle object has its own copy
     private double radius;
+    // DECISION: Added a private boolean variable to determine if the circle is filled or hollow
+    private boolean filled;
 
 
 
@@ -19,6 +21,7 @@ public class Circle {
     // AI-CHECK: Confirmed with Java conventions that constructors should validate input
     public Circle(double radius) {
         setRadius(radius);
+        this.filled = false; // Default state is hollow
     }
 
 
@@ -42,6 +45,15 @@ public class Circle {
             return; // UNDERSTAND: Early return prevents invalid assignment
         }
         this.radius = radius;
+    }
+    // Getter for filled
+    public boolean getFilled() {
+        return filled;
+    }
+
+    // Setter for filled
+    public void setFilled(boolean filled) {
+        this.filled = filled;
     }
 
 
@@ -71,6 +83,41 @@ public class Circle {
     // UNDERSTAND: Helper method to print current state of the circle
     public void displayInfo() {
         IO.println("Circle - Radius: " + radius);
+    }
+    // Method to print the circle using ASCII characters
+    // TRACE: Loops through a grid bounding box of size (2r + 1) to evaluate the circular equation
+    public void printCircle() {
+        int r = (int) radius;
+
+        // Prints the type and radius dimension header matching the template
+        IO.println("Circle (r=" + r + "):");
+
+        // Loop from -r to +r to place the origin (0,0) directly at the center of the circle
+        for (int i = -r; i <= r; i++) {
+            for (int j = -r; j <= r; j++) {
+                // UNDERSTAND: Equation of a circle is x^2 + y^2 = r^2
+                double distanceSq = (j * j) + (i * i);
+                double radiusSq = radius * radius;
+
+                if (filled) {
+                    // DECISION: For a filled circle, print everything inside or on the boundary
+                    if (distanceSq <= radiusSq + 0.5) {
+                        IO.print("* ");
+                    } else {
+                        IO.print("  ");
+                    }
+                } else {
+                    // DECISION: For a hollow circle, print coordinates sitting near the boundary line
+                    // A tolerance threshold handles integer coordinate snapping variations
+                    if (distanceSq >= radiusSq - r && distanceSq <= radiusSq + r) {
+                        IO.print("* ");
+                    } else {
+                        IO.print("  ");
+                    }
+                }
+            }
+            IO.println("");
+        }
     }
     // Sample main method for testing
     // UNDERSTAND: Entry point demonstrating Circle class functionality
@@ -106,7 +153,7 @@ public class Circle {
         Circle circle4 = new Circle(5.0);
         IO.println("Circle radius: " + circle4.getRadius());
         IO.println("Diameter: " + circle4.calculateDiameter());       // Expected: 10.0
-        IO.println("Area: " + circle4.calculateArea());               // Expected: ~78.54
-        IO.println("Perimeter: " + circle4.calculatePerimeter());    // Expected: ~31.42
+        IO.println("Area: " + circle4.calculateArea()                // Expected: ~78.54
+        IO.println("Perimeter: " + circle4.calculatePerimeter());   // Expected: ~31.42
     }
 }
