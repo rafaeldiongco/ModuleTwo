@@ -33,8 +33,8 @@ class Triangle {
     public void setBase(double base) {
         if (base <= 0) {
             // TRACE: Validation error occurs when base <= 0
-            System.out.println("Error: Base must be positive.");
-            System.out.println("Base remains: " + this.base);
+            IO.println("Error: Base must be positive.");
+            IO.println("Base remains: " + this.base);
             return; // UNDERSTAND: Early return prevents invalid assignment
         }
         this.base = base;
@@ -53,8 +53,8 @@ class Triangle {
     public void setHeight(double height) {
         if (height <= 0) {
             // TRACE: Validation error occurs when height <= 0
-            System.out.println("Error: Height must be positive.");
-            System.out.println("Height remains: " + this.height);
+            IO.println("Error: Height must be positive.");
+            IO.println("Height remains: " + this.height);
             return; // UNDERSTAND: Early return prevents invalid assignment
         }
         this.height = height;
@@ -76,4 +76,31 @@ class Triangle {
         double hypotenuse = Math.sqrt((base * base) + (height * height));
         return base + height + hypotenuse;
     }
+    // Method to display triangle information
+    // UNDERSTAND: Helper method to print current state of the triangle
+    public void displayInfo() {
+        IO.println("Triangle - Base: " + base + ", Height: " + height);
+    }
+
+    // Sample main method for testing
+    // UNDERSTAND: Entry point demonstrating Triangle class functionality
+    // DECISION: Tests multiple scenarios: normal triangles, validation, math assertions
+    public static void main(String[] args) {
+        IO.println("Testing Triangle Class: \n");
+
+        // Create a triangle with base 6 and height 4
+        // TRACE: Creates triangle1: base = 6, height = 4 (valid, positive)
+        Triangle triangle1 = new Triangle(6, 4);
+        triangle1.displayInfo();
+
+        IO.println("\nTesting with valid fractional values: ");
+        // TRACE: Creates triangle2: base = 5.5, height = 3.2
+        Triangle triangle2 = new Triangle(5.5, 3.2);
+        triangle2.displayInfo();
+
+        IO.println("\nTesting Setter Validation: ");
+        // TRACE: Creates triangle3 with valid base 4 and height 4
+        Triangle triangle3 = new Triangle(4, 4);
+        triangle3.displayInfo();
+
 }
