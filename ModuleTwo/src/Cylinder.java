@@ -60,10 +60,17 @@ public class Cylinder {
     }
 
     // UNDERSTAND: Total Surface Area of cylinder = 2πr(r + h)
-
+    // DECISION: Keeps calculations clean and isolated under its own method name
+    // TRACE: If radius is 3.0 and height is 5.0 -> 2 * Math.PI * 3.0 * (3.0 + 5.0)
+    public double calculateSurfaceArea() {
+        return 2 * Math.PI * radius * (radius + height);
+    }
 
     // UNDERSTAND: Volume of cylinder = πr²h
-
-
+    // DECISION: Uses instance fields directly without needing parameters passed in
+    // TRACE: If radius is 3.0 and height is 5.0 -> Math.PI * 3.0 * 3.0 * 5.0
+    public double calculateVolume() {
+        return Math.PI * radius * radius * height;
+    }
 
 }
