@@ -271,13 +271,36 @@ public class TwoDAndThreeDShapeCalculator {
                     System.out.printf("Volume: %.2f%n", cone.calculateVolume());
                     break;
 
+                case 5:
+                    System.out.println("\nRIGHT CIRCULAR CYLINDER:");
+                    System.out.print("Enter base radius: ");
+                    double cylR = scanner.nextDouble();
+                    System.out.print("Enter height: ");
+                    double cylH = scanner.nextDouble();
+
+                    // [UNDERSTAND] Set up a Cylinder entity, computing metrics from circle area and perimeter rules.
+                    Cylinder cylinder = new Cylinder(cylR, cylH);
+
+                    System.out.println("\nRESULTS:");
+                    // [TRACE] Query the cylinder instance methods to return calculated data variables.
+                    System.out.printf("Surface Area: %.2f%n", cylinder.calculateSurfaceArea());
+                    System.out.printf("Volume: %.2f%n", cylinder.calculateVolume());
+                    break;
+
+                case 6:
+                    // [TRACE] Drop out of the switch and loop context to go back to the top-level menu.
+                    System.out.println("Returning to Main Menu...");
+                    break;
 
 
+                default:
+                    // [DECISION] Warn user if value entered falls outside the legal choice indices.
+                    System.out.println("Invalid choice inside 3D Sub-Menu!");
+            }
 
 
         } while (choice != 6);// [DECISION] Continue looping until choice matches 6 exactly.
 
     }
-
 
 }
