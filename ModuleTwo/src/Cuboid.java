@@ -21,3 +21,18 @@ public class Cuboid {
         setWidth(width);
         setHeight(height);
     }
+
+    // Getters
+    // UNDERSTAND: Provides safe read access to the hidden, private dimension fields
+    // DECISION: Purely reads and returns values without introducing side-effects or dependencies
+    public double getLength() {
+        return length;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
