@@ -4,6 +4,7 @@
 // DECISION: Follows same pattern as Rectangle class but for 3D
 public class Cuboid {
 
+
     // Data fields
     // UNDERSTAND: Encapsulating the fields prevents outside code from messing up the object's dimensions
     // DECISION: Using double to allow for decimal dimensions for real-world measurements
@@ -22,6 +23,7 @@ public class Cuboid {
         setHeight(height);
     }
 
+
     // Getters
     // UNDERSTAND: Provides safe read access to the hidden, private dimension fields
     // DECISION: Purely reads and returns values without introducing side-effects or dependencies
@@ -35,4 +37,36 @@ public class Cuboid {
 
     public double getHeight() {
         return height;
+    }
+    // Setters with validation
+    // UNDERSTAND: Provides controlled access for changing dimensions using safety constraints
+    // DECISION: Employs early returns for negative/zero inputs to keep the code highly readable
+    public void setLength(double length) {
+        if (length <= 0) {
+            // TRACE: Halts immediate execution if length constraint is violated
+            System.out.println("Error: Length must be positive.");
+            System.out.println("Length remains unchanged: " + this.length);
+            return;
+        }
+        this.length = length;
+    }
+
+    public void setWidth(double width) {
+        if (width <= 0) {
+            // TRACE: Halts immediate execution if width constraint is violated
+            System.out.println("Error: Width must be positive.");
+            System.out.println("Width remains unchanged: " + this.width);
+            return;
+        }
+        this.width = width;
+    }
+
+    public void setHeight(double height) {
+        if (height <= 0) {
+            // TRACE: Halts immediate execution if height constraint is violated
+            System.out.println("Error: Height must be positive.");
+            System.out.println("Height remains unchanged: " + this.height);
+            return;
+        }
+        this.height = height;
     }
