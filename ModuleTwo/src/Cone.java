@@ -41,7 +41,28 @@ public class Cone {
 
 
     // Setters with validation
+    // UNDERSTAND: Lets outside layers change measurements while filtering out illegal dimensions
+    // DECISION: Uses early returns to reject bad values quickly, keeping the logic flat and readable
+    public void setRadius(double radius) {
+        if (radius <= 0) {
+            // TRACE: Rejects the assignment immediately if the radius is zero or negative
+            System.out.println("Error: Radius must be positive.");
+            System.out.println("Radius remains unchanged: " + this.radius);
+            return;
+        }
+        this.radius = radius;
+    }
 
+    public void setHeight(double height) {
+        if (height <= 0) {
+            // TRACE: Rejects the assignment immediately if the height is zero or negative
+            System.out.println("Error: Height must be positive.");
+
+            System.out.println("Height remains unchanged: " + this.height);
+            return;
+        }
+        this.height = height;
+    }
 
 
 
