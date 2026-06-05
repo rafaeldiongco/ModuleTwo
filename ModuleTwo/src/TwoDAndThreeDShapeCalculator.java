@@ -206,6 +206,24 @@ public class TwoDAndThreeDShapeCalculator {
             System.out.println("6. Return to Main Menu");
             System.out.print("Enter your choice (1-6): ");
 
+            // [TRACE] Save the current selection inside the choice variable tracker.
+            choice = scanner.nextInt();
+
+            // [DECISION] Allocate and execute code blocks based on the chosen 3D solid shape.
+            switch (choice) {
+                case 1:
+                    System.out.print("\nCUBE:\nEnter side: ");
+                    double side = scanner.nextDouble();
+
+                    // [UNDERSTAND] Instantiate a Cube object where length, width, and height are identical.
+                    Cube cube = new Cube(side);
+
+                    System.out.println("\nRESULTS:");
+                    // [TRACE] Extract and show the computed metrics from the object.
+                    System.out.printf("Surface Area: %.2f%n", cube.calculateSurfaceArea());
+                    System.out.printf("Volume: %.2f%n", cube.calculateVolume());
+                    break;
+
 
         } while (choice != 6);
 
