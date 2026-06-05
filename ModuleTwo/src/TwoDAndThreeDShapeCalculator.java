@@ -8,13 +8,13 @@ public class TwoDAndThreeDShapeCalculator {
 
         // [TRACE] Start the primary console loop to display the high-level options.
         do {
-            IO.println("\n========================================");
-            IO.println("      GEOMETRY CALCULATOR MAIN MENU     ");
-            IO.println("========================================");
-            IO.println("1. 2D Shapes");
-            IO.println("2. 3D Solids");
-            IO.println("3. Exit");
-            IO.print("Enter your choice (1-3): ");
+            System.out.println("\n========================================");
+            System.out.println("      GEOMETRY CALCULATOR MAIN MENU     ");
+            System.out.println("========================================");
+            System.out.println("1. 2D Shapes");
+            System.out.println("2. 3D Solids");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice (1-3): ");
 
             // [TRACE] Grab the menu choice integer entered by the user.
             mainChoice = scanner.nextInt();
@@ -31,11 +31,11 @@ public class TwoDAndThreeDShapeCalculator {
                     break;
                 case 3:
                     // [TRACE] Option 3 chosen: Print a clean exit message.
-                    IO.println("Exiting application. Goodbye!");
+                    System.out.println("Exiting application. Goodbye!");
                     break;
                 default:
                     // [DECISION] Fallback line if user picks an option outside the 1-3 bounds.
-                    IO.println("Invalid choice! Please select 1, 2, or 3.");
+                    System.out.println("Invalid choice! Please select 1, 2, or 3.");
             }
             // [DECISION] Keep running the main menu as long as the user doesn't pick option 3.
         } while (mainChoice != 3);
@@ -43,42 +43,44 @@ public class TwoDAndThreeDShapeCalculator {
         // [UNDERSTAND] Close the scanner link to clean up and prevent any memory leaks.
         scanner.close();
     }
+
+    //2D Shapes Sub-menu
+    private static void handleTwoDMenu(Scanner scanner) {
         int choice;
         // [TRACE] Start the menu loop that keeps running until the user wants to quit
         do {
-            IO.println("\nWelcome to the 2D Shapes Calculator App!");
-            IO.println("========================================");
-            IO.println("2D SHAPES CALCULATOR");
-            IO.println("========================================");
-            IO.println("1. Square");
-            IO.println("2. Rectangle");
-            IO.println("3. Circle");
-            IO.println("4. Ellipse");
-            IO.println("5. Triangle");
-            IO.println("6. Exit");
-            IO.print("Enter your choice (1-6): ");
-
-
+            System.out.println("\n========================================");
+            System.out.println("          2D SHAPES SUB-MENU            ");
+            System.out.println("========================================");
+            System.out.println("1. Square");
+            System.out.println("2. Rectangle");
+            System.out.println("3. Circle");
+            System.out.println("4. Ellipse");
+            System.out.println("5. Triangle");
+            System.out.println("6. Return to Main Menu");
+            System.out.print("Enter your choice (1-6): ");
 
             // [TRACE] Capture the user's menu selection
             // [DECISION] Input is stored as integer to act as the switch controller
             choice = scanner.nextInt();
+
             // [DECISION] Determine which shape logic to run based on the user's choice
             switch (choice) {
                 case 1:
-                    IO.print("\nSQUARE:\nEnter side length: ");
+                    System.out.print("\nSQUARE:\nEnter side length: ");
                     double s = scanner.nextDouble();
-                    Square sq = new Square(s); // [UNDERSTAND] Create object with user input
 
-                    IO.print("\nDo you want to display the square? (yes/no): ");
+                    Square sq = new Square(s); //[UNDERSTAND] Create an instance of the Square object using the constructor.
+
+                    System.out.print("\nDo you want to display the square? (yes/no): ");
                     String displaySq = scanner.next();
 
-                    IO.println("\nRESULTS:");
-                    IO.println("Shape: Square");
-                    IO.println("Side: " + (int)s);
+                    System.out.println("\nRESULTS:");
+                    System.out.println("Shape: Square");
+                    System.out.println("Side: " + (int)s);
                     // [TRACE] Accessing class methods to retrieve calculated state
-                    IO.printf("Area: %.2f%n", sq.calculateArea());
-                    IO.printf("Perimeter: %.2f%n", sq.calculatePerimeter());
+                    System.out.printf("Area: %.2f%n", sq.calculateArea());
+                    System.out.printf("Perimeter: %.2f%n", sq.calculatePerimeter());
 
                     // [DECISION] Validate user preference to trigger optional visualization method
                     if (displaySq.equalsIgnoreCase("yes") || displaySq.equalsIgnoreCase("y")) {
@@ -86,20 +88,20 @@ public class TwoDAndThreeDShapeCalculator {
                     }
                     break;
                 case 2:
-                    IO.println("\nRECTANGLE:");
-                    IO.print("Enter width: ");
+                    System.out.println("\nRECTANGLE:");
+                    System.out.print("Enter width: ");
                     double w = scanner.nextDouble();
-                    IO.print("Enter height: ");
+                    System.out.print("Enter height: ");
                     double h = scanner.nextDouble();
                     Rectangle rect = new Rectangle(w, h); // [UNDERSTAND] Create object with dimensions
 
-                    IO.print("\nDo you want to display the rectangle? (yes/no): ");
+                    System.out.print("\nDo you want to display the rectangle? (yes/no): ");
                     String displayRect = scanner.next();
 
-                    IO.println("\nRESULTS:");
-                    IO.println("Shape: Rectangle");
-                    IO.printf("Area: %.2f%n", rect.calculateArea());
-                    IO.printf("Perimeter: %.2f%n", rect.calculatePerimeter());
+                    System.out.println("\nRESULTS:");
+                    System.out.println("Shape: Rectangle");
+                    System.out.printf("Area: %.2f%n", rect.calculateArea());
+                    System.out.printf("Perimeter: %.2f%n", rect.calculatePerimeter());
 
                     // [DECISION] Check if visual representation is requested
                     if (displayRect.equalsIgnoreCase("yes") || displayRect.equalsIgnoreCase("y")) {
@@ -108,12 +110,12 @@ public class TwoDAndThreeDShapeCalculator {
                     break;
 
                 case 3:
-                    IO.println("\nCIRCLE:\nEnter radius: ");
+                    System.out.println("\nCIRCLE:\nEnter radius: ");
                     double rad = scanner.nextDouble();
                     // [UNDERSTAND] Instantiate Circle; radius is the primary state factor
                     Circle circ = new Circle(rad);
 
-                    IO.print("\nDo you want to display the circle? (yes/no): ");
+                    System.out.print("\nDo you want to display the circle? (yes/no): ");
                     String displayCirc = scanner.next();
 
                     IO.println("\nRESULTS:");
@@ -174,18 +176,20 @@ public class TwoDAndThreeDShapeCalculator {
 
                 case 6:
                     // [TRACE] Exit selected: break breaks the switch, loop condition handles exit
-                    IO.println("Exiting...");
+                    IO.println("Returning to Main menu...");
                     break;
 
                 default:
                     // [DECISION] Error handling for any integer input outside the 1-6 range
-                    IO.println("Invalid choice!");
+                    IO.println("Invalid choice inside 2D Sub-Menu!");
             }
 
 
         } while (choice != 6);// [DECISION] Loop condition: continue as long as the user hasn't chosen 6
 
-        scanner.close();// [UNDERSTAND] Clean up system resources by closing the scanner object
-
     }
+
+
+
+
 }
