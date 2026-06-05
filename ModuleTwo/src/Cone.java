@@ -71,17 +71,31 @@ public class Cone {
 
 
     // UNDERSTAND: Calculates slant height using Pythagorean theorem: l = √(r² + h²)
-
+    // DECISION: Uses Math.sqrt() to handle the square root cleanly without extra math libraries
+    // TRACE: If radius is 3.0 and height is 4.0 -> √(3² + 4²) = √(9 + 16) = √25 = 5.0
+    public double calculateSlantHeight() {
+        return Math.sqrt((radius * radius) + (height * height));
+    }
 
 
     // UNDERSTAND: Total Surface Area of cone = πr(r + l) where l is slant height
-
+    // DECISION: Reuses the calculateSlantHeight() method to keep code clean and modular
+    // TRACE: If radius is 3.0 and slant height is 5.0 -> Math.PI * 3.0 * (3.0 + 5.0)
+    public double calculateSurfaceArea() {
+        double slantHeight = calculateSlantHeight();
+        return Math.PI * radius * (radius + slantHeight);
+    }
 
 
 
 
     // UNDERSTAND: Volume of cone = (1/3)πr²h
 
+    // DECISION: Written as (1.0 / 3.0) to stop Java from doing integer division and turning it into 0.0
+    // TRACE: If radius is 3.0 and height is 4.0 -> (1.0 / 3.0) * Math.PI * 3.0 * 3.0 * 4.0
+    public double calculateVolume() {
+        return (1.0 / 3.0) * Math.PI * radius * radius * height;
+    }
 
 
 }
