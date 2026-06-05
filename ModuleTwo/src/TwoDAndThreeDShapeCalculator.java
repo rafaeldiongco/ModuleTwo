@@ -241,9 +241,22 @@ public class TwoDAndThreeDShapeCalculator {
                     System.out.printf("Volume: %.2f%n", cuboid.calculateVolume());
                     break;
 
+                case 3:
+                    System.out.print("\nSPHERE:\nEnter radius: ");
+                    double r = scanner.nextDouble();
+
+                    // [UNDERSTAND] Create a Sphere object; formulas internally multiply radius cubed values.
+                    Sphere sphere = new Sphere(r);
+
+                    System.out.println("\nRESULTS:");
+                    // [TRACE] Request area and volume parameters from the sphere instance.
+                    System.out.printf("Surface Area: %.2f%n", sphere.calculateSurfaceArea());
+                    System.out.printf("Volume: %.2f%n", sphere.calculateVolume());
+                    break;
 
         } while (choice != 6);
 
     }
+
 
 }
