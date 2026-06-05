@@ -70,3 +70,17 @@ public class Cuboid {
         }
         this.height = height;
     }
+    // UNDERSTAND: Total Surface Area of cuboid = 2 * (length*width + width*height + length*height)
+    // DECISION: Split out as its own separate calculation method following Single Responsibility
+    // TRACE: For length=2.0, width=3.0, height=4.0 -> 2 * (6.0 + 12.0 + 8.0) = 52.0
+    public double calculateSurfaceArea() {
+        return 2 * ((length * width) + (width * height) + (length * height));
+    }
+
+    // UNDERSTAND: Volume of cuboid = length * width * height
+    // DECISION: Accesses instance fields directly without needing parameter lists
+    // TRACE: For length=2.0, width=3.0, height=4.0 -> 2.0 * 3.0 * 4.0 = 24.0
+    public double calculateVolume() {
+        return length * width * height;
+    }
+}
