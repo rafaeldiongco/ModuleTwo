@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class TwoDShapeCalculator {
+public class TwoDAndThreeDShapeCalculator {
     public static void main(String[] args) {
         // [UNDERSTAND] Set up input so we can read from the keyboard
         Scanner scanner = new Scanner(System.in);
