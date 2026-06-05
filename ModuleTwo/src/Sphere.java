@@ -50,11 +50,19 @@ public class Sphere {
 
 
     // UNDERSTAND: Surface Area of sphere = 4πr²
-
+    // DECISION: Uses standard Math.PI constant to provide high floating-point precision
+    // TRACE: If radius is 3.0 -> area calculation is 4 * Math.PI * 3.0 * 3.0
+    public double calculateSurfaceArea() {
+        return 4 * Math.PI * radius * radius;
+    }
 
 
     // UNDERSTAND: Volume of sphere = (4/3)πr³
-
+    // DECISION: Written as (4.0 / 3.0) to prevent integer division dropping fractions down to 1.0
+    // TRACE: If radius is 3.0 -> volume calculation is (4.0 / 3.0) * Math.PI * 3.0 * 3.0 * 3.0
+    public double calculateVolume() {
+        return (4.0 / 3.0) * Math.PI * radius * radius * radius;
+    }
 
 
 }
