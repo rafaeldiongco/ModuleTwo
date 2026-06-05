@@ -25,6 +25,7 @@ public class Cube {
     public double getSide() {
         return side;
     }
+
     // Setter with validation
     // UNDERSTAND: Let's outside code change the side value under strict rules
     // DECISION: Uses an early return if the input is bad to keep the code clean and easy to follow
@@ -37,3 +38,17 @@ public class Cube {
         }
         this.side = side;
     }
+    // UNDERSTAND: Total Surface Area of cube = 6 * side²
+    // DECISION: Created as its own separate method to keep calculations clean
+    // TRACE: If side is 3.0, surface area calculation is 6 * 3.0 * 3.0 = 54.0
+    public double calculateSurfaceArea() {
+        return 6 * side * side;
+    }
+
+    // UNDERSTAND: Volume of cube = side³
+    // DECISION: Uses the instance variable directly without needing extra parameters passed in
+    // TRACE: If side is 3.0, volume calculation is 3.0 * 3.0 * 3.0 = 27.0
+    public double calculateVolume() {
+        return side * side * side;
+    }
+}
