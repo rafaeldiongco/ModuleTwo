@@ -254,7 +254,28 @@ public class TwoDAndThreeDShapeCalculator {
                     System.out.printf("Volume: %.2f%n", sphere.calculateVolume());
                     break;
 
-        } while (choice != 6);
+                case 4:
+                    System.out.println("\nRIGHT CIRCULAR CONE:");
+                    System.out.print("Enter base radius: ");
+                    double coneR = scanner.nextDouble();
+                    System.out.print("Enter height: ");
+                    double coneH = scanner.nextDouble();
+
+                    // [UNDERSTAND] Create a Cone instance where slant height is solved using Pythagorean theorem.
+                    Cone cone = new Cone(coneR, coneH);
+
+                    System.out.println("\nRESULTS:");
+                    // [TRACE] Requirement match: print calculated slant height before the other output data.
+                    System.out.printf("Slant Height: %.2f%n", cone.calculateSlantHeight());
+                    System.out.printf("Surface Area: %.2f%n", cone.calculateSurfaceArea());
+                    System.out.printf("Volume: %.2f%n", cone.calculateVolume());
+                    break;
+
+
+
+
+
+        } while (choice != 6);// [DECISION] Continue looping until choice matches 6 exactly.
 
     }
 
