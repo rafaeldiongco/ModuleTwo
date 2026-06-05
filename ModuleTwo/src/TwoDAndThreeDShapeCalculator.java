@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class TwoDAndThreeDShapeCalculator {
@@ -118,10 +119,10 @@ public class TwoDAndThreeDShapeCalculator {
                     System.out.print("\nDo you want to display the circle? (yes/no): ");
                     String displayCirc = scanner.next();
 
-                    IO.println("\nRESULTS:");
-                    IO.println("Shape: Circle");
-                    IO.printf("Area: %.2f%n", circ.calculateArea());
-                    IO.printf("Perimeter: %.2f%n", circ.calculatePerimeter());
+                    System.out.println("\nRESULTS:");
+                    System.out.println("Shape: Circle");
+                    System.out.printf("Area: %.2f%n", circ.calculateArea());
+                    System.out.printf("Perimeter: %.2f%n", circ.calculatePerimeter());
 
                     // [DECISION] Logic branch for circle visualization
 
@@ -131,20 +132,20 @@ public class TwoDAndThreeDShapeCalculator {
                     break;
 
                 case 4:
-                    IO.println("\nELLIPSE:\nEnter semi-major axis (a): ");
+                    System.out.println("\nELLIPSE:\nEnter semi-major axis (a): ");
                     double a = scanner.nextDouble();
-                    IO.print("Enter semi-minor axis (b): ");
+                    System.out.print("Enter semi-minor axis (b): ");
                     double b = scanner.nextDouble();
                     // [UNDERSTAND] Create Ellipse; requires two radii (a and b) for accurate calculation
                     Ellipse ell = new Ellipse(a, b);
 
-                    IO.print("\nDo you want to display the ellipse? (yes/no): ");
+                    System.out.print("\nDo you want to display the ellipse? (yes/no): ");
                     String displayEll = scanner.next();
 
-                    IO.println("\nRESULTS:");
-                    IO.println("Shape: Ellipse");
-                    IO.printf("Area: %.2f%n", ell.calculateArea());
-                    IO.printf("Perimeter: %.2f%n", ell.calculatePerimeter());
+                    System.out.println("\nRESULTS:");
+                    System.out.println("Shape: Ellipse");
+                    System.out.printf("Area: %.2f%n", ell.calculateArea());
+                    System.out.printf("Perimeter: %.2f%n", ell.calculatePerimeter());
                     // [DECISION] Check for visualization request specific to Ellipse class
                     if (displayEll.equalsIgnoreCase("yes") || displayEll.equalsIgnoreCase("y")) {
                         ell.printASCII();
@@ -153,20 +154,20 @@ public class TwoDAndThreeDShapeCalculator {
 
 
                 case 5:
-                    IO.println("\nTRIANGLE:\nEnter base: ");
+                    System.out.println("\nTRIANGLE:\nEnter base: ");
                     double ba = scanner.nextDouble();
-                    IO.print("Enter height: ");
+                    System.out.print("Enter height: ");
                     double he = scanner.nextDouble();
                     // [UNDERSTAND] Initialize Triangle; area depends on base and vertical height
                     Triangle tri = new Triangle(ba, he);
 
-                    IO.print("\nDo you want to display the triangle? (yes/no): ");
+                    System.out.print("\nDo you want to display the triangle? (yes/no): ");
                     String displayTri = scanner.next();
 
-                    IO.println("\nRESULTS:");
-                    IO.println("Shape: Triangle");
-                    IO.printf("Area: %.2f%n", tri.calculateArea());
-                    IO.printf("Perimeter: %.2f%n", tri.calculatePerimeter());
+                    System.out.println("\nRESULTS:");
+                    System.out.println("Shape: Triangle");
+                    System.out.printf("Area: %.2f%n", tri.calculateArea());
+                    System.out.printf("Perimeter: %.2f%n", tri.calculatePerimeter());
 
                     // [DECISION] Trigger drawing method if requested
                     if (displayTri.equalsIgnoreCase("yes") || displayTri.equalsIgnoreCase("y")) {
@@ -176,12 +177,12 @@ public class TwoDAndThreeDShapeCalculator {
 
                 case 6:
                     // [TRACE] Exit selected: break breaks the switch, loop condition handles exit
-                    IO.println("Returning to Main menu...");
+                    System.out.println("Returning to Main menu...");
                     break;
 
                 default:
                     // [DECISION] Error handling for any integer input outside the 1-6 range
-                    IO.println("Invalid choice inside 2D Sub-Menu!");
+                    System.out.println("Invalid choice inside 2D Sub-Menu!");
             }
 
 
@@ -189,7 +190,25 @@ public class TwoDAndThreeDShapeCalculator {
 
     }
 
+    //3D Solids Sub-menu
+    private static void handleThreeDMenu(Scanner scanner) {
+        int choice;
+        // [TRACE] Enter the 3D loop thread to process dimensional calculations.
+        do {
+            System.out.println("\n========================================");
+            System.out.println("          3D SOLIDS SUB-MENU            ");
+            System.out.println("========================================");
+            System.out.println("1. Cube");
+            System.out.println("2. Cuboid");
+            System.out.println("3. Sphere");
+            System.out.println("4. Right Circular Cone");
+            System.out.println("5. Right Circular Cylinder");
+            System.out.println("6. Return to Main Menu");
+            System.out.print("Enter your choice (1-6): ");
 
 
+        } while (choice != 6);
+
+    }
 
 }
