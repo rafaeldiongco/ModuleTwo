@@ -223,6 +223,23 @@ public class TwoDAndThreeDShapeCalculator {
                     System.out.printf("Surface Area: %.2f%n", cube.calculateSurfaceArea());
                     System.out.printf("Volume: %.2f%n", cube.calculateVolume());
                     break;
+                case 2:
+                    System.out.println("\nCUBOID (Rectangular Box):");
+                    System.out.print("Enter length: ");
+                    double l = scanner.nextDouble();
+                    System.out.print("Enter width: ");
+                    double w = scanner.nextDouble();
+                    System.out.print("Enter height: ");
+                    double h = scanner.nextDouble();
+
+                    // [UNDERSTAND] Instantiating a Cuboid requires tracking 3 different dimensional states.
+                    Cuboid cuboid = new Cuboid(l, w, h);
+
+                    System.out.println("\nRESULTS:");
+                    // [TRACE] Print out surface area and volume based on the three values.
+                    System.out.printf("Surface Area: %.2f%n", cuboid.calculateSurfaceArea());
+                    System.out.printf("Volume: %.2f%n", cuboid.calculateVolume());
+                    break;
 
 
         } while (choice != 6);
