@@ -18,9 +18,22 @@ public class Cube {
         setSide(side);
     }
 
+
     // Getter
     // UNDERSTAND: Let's outside code read the private side value safely
     // DECISION: Purely reads the value without changing anything else
     public double getSide() {
         return side;
+    }
+    // Setter with validation
+    // UNDERSTAND: Let's outside code change the side value under strict rules
+    // DECISION: Uses an early return if the input is bad to keep the code clean and easy to follow
+    public void setSide(double side) {
+        if (side <= 0) {
+            // TRACE: Stops the assignment immediately if the number is zero or negative
+            System.out.println("Error: Side length must be positive.");
+            System.out.println("Side remains unchanged: " + this.side);
+            return;
+        }
+        this.side = side;
     }
