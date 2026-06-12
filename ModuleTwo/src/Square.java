@@ -1,7 +1,7 @@
 // UNDERSTAND: This class models a geometric square
 // AI-CHECK: Verified class design follows standard JavaBeans patterns (getters/setters)
 
-class Square {
+public class Square extends Rectangle {
     // Data field (attribute)
     // UNDERSTAND: Private access restricts direct modification from outside the class
     // DECISION: side is stored as double (not int) to support fractional measurements
@@ -11,26 +11,30 @@ class Square {
     private boolean filled;
 
     // Constructor
-    // UNDERSTAND: Called when a new Square object is created - initializes object state
-    // DECISION: Delegates to setter for validation (reuses existing validation logic)
-    // AI-CHECK: Confirmed with textbook that setter delegation is a standard pattern
-    Square(double side) {
+    // UNDERSTAND: Single-parameter constructor defaults the color string to "black"
+    // DECISION: Passes dimensions up to the super class Rectangle to establish bounds
+    public Square(double side) {
+        super(side, side, "black");
         setSide(side);  // Using setter for validation
         this.filled = false; // Default state is hollow
     }
+    // UNDERSTAND: Multi-parameter constructor maps structural dimensions and custom color
+    // DECISION: Propagates side and explicit color parameters directly to the parent class
+    public Square(double side, String color) {
+        super(side, side, color);
+        setSide(side);
+        this.filled = false;
+    }
 
     // Getter for side
-    // UNDERSTAND: Provides controlled access to private field
-    // DECISION: No validation needed in getter (only returning value, not modifying)
-    double getSide() {
+    public double getSide() {
         return side;
     }
 
-    // Setter for side with validation
-    // UNDERSTAND: Allows modification of side with input validation (positive numbers only)
-    // DECISION: Used early return pattern for invalid input (instead of throwing exception)
-    // because this is designed for beginners learning control flow
-    void setSide(double side) {
+    // Setter for side with integrated legacy validation
+    // UNDERSTAND: Guarantees the structural integrity of the square by catching invalid entries early
+    // DECISION: Overrides internal properties and pushes changes up to super (Rectangle) to maintain geometric sync
+    public void setSide(double side) {
         if (side <= 0) {
             // TRACE: Validation error occurs when side <= 0
             IO.println("Error: Side must be positive.");
@@ -38,42 +42,36 @@ class Square {
             return;  // UNDERSTAND: Early return prevents invalid assignment
         }
         this.side = side;
+        // UNDERSTAND: Syncs dimension update with parent class width field
+        super.setWidth(side);
+        // UNDERSTAND: Syncs dimension update with parent class height field
+        super.setHeight(side);
     }
 
     // Getter for filled
-    boolean getFilled() {
+    public boolean getFilled() {
         return filled;
     }
 
     // Setter for filled
-    void setFilled(boolean filled) {
+    public void setFilled(boolean filled) {
         this.filled = filled;
     }
-
-    // Method to calculate area
-    // UNDERSTAND: Returns area of square = side * side
-    // DECISION: No input parameters needed (side already stored in object state)
-    // Result is always non-negative
-    double calculateArea() {
-        return side * side;
+    // UNDERSTAND: Intercepts Rectangle width changes to enforce equal aspect ratio
+    @Override
+    public void setWidth(double width) {
+        setSide(width);
     }
 
-    // Method to calculate perimeter
-    // UNDERSTAND: Returns perimeter of square = 4 * side
-    // DECISION: Separated from calculateArea() to follow Single Responsibility Principle
-    double calculatePerimeter() {
-        return 4 * side;
-    }
-
-    // Method to display square information
-    // UNDERSTAND: Helper method to print current state of the square
-    void displayInfo() {
-        IO.println("Square side: " + side);
+    // UNDERSTAND: Intercepts Rectangle height changes to enforce equal aspect ratio
+    @Override
+    public void setHeight(double height) {
+        setSide(height);
     }
 
     // Method to print the square using ASCII characters
     // TRACE: Loops through rows and columns based on the side length
-    void printSquare() {
+    public void printSquare() {
         int n = (int) side;
 
         for (int i = 0; i < n; i++) {
@@ -89,6 +87,17 @@ class Square {
             IO.println("");
         }
     }
+    // UNDERSTAND: Overrides parent definition to format localized shape calculations
+    // DECISION: Employs two decimal place formatting to display inherited measurements
+    @Override
+    public String toString() {
+        return "Square | color: " + color
+                + " | side: "       + side
+                + " | area: "       + String.format("%.2f", calculateArea())
+                + " | perimeter: "  + String.format("%.2f", calculatePerimeter());
+    }
+}
+
 
     // Sample main method for testing
     // UNDERSTAND: Entry point demonstrating Square class functionality
