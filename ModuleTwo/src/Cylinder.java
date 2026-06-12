@@ -14,10 +14,11 @@ public class Cylinder {
 
 
     // Constructor
-    // UNDERSTAND: Creates a new Cylinder and ensures its dimensions are safe right from the start
-    // DECISION: Calls the setters directly to reuse the input validation rules
+    // UNDERSTAND: Two-parameter constructor defaults the color string to "white"
+    // DECISION: Delegates to explicit setters to keep input validation centralized
     // AI-CHECK: Matches standard practice of filtering arguments inside constructors
     public Cylinder(double radius, double height) {
+        super("white"); // UNDERSTAND: Passes default color property to the parent class
         setRadius(radius);
         setHeight(height);
     }
@@ -59,18 +60,29 @@ public class Cylinder {
         this.height = height;
     }
 
-    // UNDERSTAND: Total Surface Area of cylinder = 2πr(r + h)
     // DECISION: Keeps calculations clean and isolated under its own method name
-    // TRACE: If radius is 3.0 and height is 5.0 -> 2 * Math.PI * 3.0 * (3.0 + 5.0)
+    // UNDERSTAND: Fully satisfies the structural requirement of the Measurable3D interface
+    @Override
     public double calculateSurfaceArea() {
-        return 2 * Math.PI * radius * (radius + height);
+        return (2 * Math.PI * radius * height) + (2 * Math.PI * radius * radius);
     }
 
     // UNDERSTAND: Volume of cylinder = πr²h
     // DECISION: Uses instance fields directly without needing parameters passed in
     // TRACE: If radius is 3.0 and height is 5.0 -> Math.PI * 3.0 * 3.0 * 5.0
+    @Override
     public double calculateVolume() {
         return Math.PI * radius * radius * height;
+    }
+    // UNDERSTAND: Overrides the abstract definition to format localized shape calculations
+    // DECISION: Employs two decimal place formatting to display 3D surface measurements cleanly
+    @Override
+    public String toString() {
+        return "Cylinder | color: "      + color
+                + " | radius: "          + radius
+                + " | height: "          + height
+                + " | surface area: "    + String.format("%.2f", calculateSurfaceArea())
+                + " | volume: "          + String.format("%.2f", calculateVolume());
     }
 
 }
